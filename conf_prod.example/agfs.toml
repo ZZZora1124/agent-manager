@@ -1,0 +1,4 @@
+# AgFS API 配置
+Endpoint = "http://10.11.153.100:8301"
+Driver = "agfs.csi.baidu.com"
+

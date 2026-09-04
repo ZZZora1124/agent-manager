@@ -1,0 +1,49 @@
+# app.toml: 应用主配置文件
+
+[Base]
+# 应用名称，代码里可通过 env.AppName() 方法读取到
+AppName = "agent-runtime-manager"
+
+# 运行模式，可配置值：
+# debug    : 调试，    对应常量 env.RunModeDebug
+# test     : 测试，    对应常量 env.RunModeTest
+# release  : 线上发布， 对应常量 env.RunModeRelease
+# 程序代码可以通过 env.RunMode() 获取该值
+# 详见 https://gdp.baidu-int.com/api/baidu/gdp/env/
+RunMode = "release"
+
+# 逻辑 IDC
+# 代码里可通过 env.IDC() 方法读取到
+IDC = "prod"
+
+[Meta]
+# 定义应用使用的端口情况，可选，0-N 个
+# 下面定义的端口信息会在 server.toml 中用到，如 port.Main 读取的是下面 Name = "Main" 的端口信息
+[[Meta.Ports]]
+Name = "Main"                  # 端口名称，必填，标识符类型
+DevDefault = 8080              # 开发测试阶段使用的默认端口，必填。当从环境变量 LISTEN_PORT_1 没有取到值的时候使用
+# 取值来源，可选。
+# 当值为 env，从环境变量中读取（key 定义在 Value 字段）
+# 当值为空，或者是 Manual 时，使用 Value 里存储的端口 （ ECI 集群不支持 ）
+From = "env"
+Value = "LISTEN_PORT"        # 取值字段，必填
+
+[[Meta.Ports]]
+Name = "Admin"
+DevDefault = 8081
+From = "env"
+Value = "LISTEN_PORT_1"
+
+# 功能开关
+[Feature]
+# 懒迁移：沙箱释放时自动将 local-path PVC 数据迁移到 CFS 共享存储
+LazyMigrationToCFS = false
+
+# 定义在 PaaS 平台上，（实例列表页面或者实例详情页面）需要展示的连接
+# 可以有 0-N 个
+[[Meta.Links]]
+Name = "GDP应用面板"              # Name 展现名称，必填
+URI = "/debug/panel/"            # URI 链接地址，URI 和 URL 不同时存在，但应存在一个。URI 字段优先级更高
+# 当 URI 有值的时候，必填。在拼接链接的时候会使用，拼接效果  http://$hostname:$PortName$URI
+PortName = "Admin"
+

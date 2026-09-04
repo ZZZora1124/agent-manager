@@ -1,0 +1,5 @@
+# DNS API 配置
+Endpoint = "http://bcedns.baidu-int.com"
+ProductName = "magellan"
+Token = "REPLACE_ME"
+

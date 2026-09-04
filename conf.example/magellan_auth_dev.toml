@@ -1,0 +1,6 @@
+Name = "magellan_auth_dev"
+
+Namespace = "dev"
+Endpoint = "http://10.45.176.224"
+Token = "REPLACE_ME"
+

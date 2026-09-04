@@ -1,0 +1,79 @@
+# Service的名字，必选
+Name = "mysql_main"
+
+# 注意：
+# 由于目前 MySQL 服务提供的 BNS 里并没有配置 超时时间等 config
+# 所以，使用的 BNS 时也需要配置下列几项超时时间(若有 config 则可以不配置)
+
+# 连接超时，ms，若不配置，使用默认值 5s
+ConnTimeOut = 200
+
+# 写数据超时，ms，若不配置，使用默认值 5s
+WriteTimeOut = 1500
+
+# 读数据超时，ms，若不配置，使用默认值 5s
+ReadTimeOut = 5000
+
+# 资源使用策略，非必选，默认使用 RoundRobin
+# RoundRobin: 依次轮询
+# Random 随机
+[Strategy]
+Name="Random"
+
+# 资源定位配置必须有且只有一项
+# 资源定位：推荐使用 BNS
+# [Resource.BNS]
+# 注意，gdp/net 版本低于 v1.20.18 时，不要将 BNS 配置成 Resource.Manual.Host，
+# 连接的稳定性会较低（每次都需要 DNS 解析）
+# 和其他类型的服务配置一样，若是 BNS 的 config 里配置了超时时间，不需要在此文件配置 ConnTimeOut 等参数
+# BNSName = "smartbns.xxx-bmi0000.xdb.all"
+
+# 资源定位：手动配置 - 使用IP、端口(线上不建议使用该方式)
+[Resource.Manual]
+# 默认规则
+[[Resource.Manual.default]]
+Host = "10.27.252.211"
+Port = 3306
+
+# tc机房的配置
+# [[Resource.Manual.tc]]
+# Host = "127.0.0.1"
+# Port = 3306
+
+# [[Resource.Manual.tc]]
+# Host = "127.0.0.2"
+# Port = 3306
+
+# MySQL 特有配置部分 (必须有)
+[MySQL]
+Username     = "comate_stack_rw"
+
+# 使用 SSM，避免直接配置明文密码：
+# https://gdp.baidu-int.com/api/baidu/gdp/gcloud/ssm
+Password = "REPLACE_ME"
+
+DBName       = "agent_runtime"
+DBDriver     = "mysql"
+
+# MaxOpenPerIP 每个 IP 最多连接数，若过小，会出现查询排队等待的情况
+# 该配置项不存在，或者值为0：不限制
+MaxOpenPerIP = 10
+
+# MaxIdlePerIP 每个 IP 最多连接空闲数，最大可以设置成 和 MaxOpenPerIP 一样
+# 该配置项不存在，或者值为 0：使用 sql 标准库的默认值 2
+MaxIdlePerIP = 10
+
+# ConnMaxLifeTime 连接复用最长时间，单位 ms
+# 该配置项不存在，或者值为0：不限制，连接总是尽可能复用，交互失败后才关闭连接
+# 可以根据线上实际情况，设置一个比较大的合适的时间，以减少创建新连接带来的不稳定性
+ConnMaxLifeTime = 300000 # 单位 ms。当前：300000 ms ==> 5 分钟
+
+SQLLogLen      =-1    # 打印sql内容，为0不打印，-1 为全部
+SQLArgsLogLen  =-1    # 打印sql参数内容，为0不打印，-1 为全部
+LogIDTransport = true # 是否sql注释传递logid
+
+# DSNParams 可选参数，请按需配置，请参考 https://github.com/go-sql-driver/mysql
+# 若是 DDBS(DRDS) 或者 数据库不支持 prepare，需配置上 interpolateParams=true （详见下列6.2）
+# timeout、writeTimeout、readTimeout 这几个参数不会使用 DSNParams 配置的，使用的是服务统一配置的
+DSNParams ="charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true&loc=Asia%2FShanghai&interpolateParams=true"
+

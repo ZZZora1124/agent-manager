@@ -1,0 +1,10 @@
+Name = "devops_auth"
+
+AuthEndpoint = "http://10.11.157.225:8061"
+ModelAuthEndpoint = "http://10.11.152.208:8501"
+ClientToken = "REPLACE_ME"
+
+GlobalAccessToken = "REPLACE_ME"
+
+ZtAuthorizationSecret = "REPLACE_ME"
+

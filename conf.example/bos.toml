@@ -1,0 +1,7 @@
+Name = "bos"
+
+Endpoint = "bj.bcebos.com"
+AccessKey = "REPLACE_ME"
+SecretKey = "REPLACE_ME"
+ArtifactBucket = "agent-runtime-artifact"
+

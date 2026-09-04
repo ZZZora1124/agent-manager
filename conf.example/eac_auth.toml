@@ -1,0 +1,13 @@
+Name = "eac_auth"
+
+AuthEndpoint = "https://itebeta.baidu.com/uic"
+AccessKey = "REPLACE_ME"
+SecretKey = "REPLACE_ME"
+# Card callback AES encryption key (base64 encoded)
+CardCallbackAESKey = "REPLACE_ME"
+
+userSendCardAppKey = "REPLACE_ME"
+userSendCardAppSecret = "REPLACE_ME"
+# 如流动态卡片 host，用于获取 user_access_token
+userSendCardHost = "http://apiin.im.baidu.com/api"
+

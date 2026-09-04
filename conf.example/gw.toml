@@ -1,0 +1,12 @@
+Name = "gw"
+
+Endpoint = "https://gw-test.n.baidu-int.com"
+Business = "one-tool-zerotrust"
+SecretKey = "REPLACE_ME"
+AccountName = "智能云事业群组 > 云计算平台支持 > 企业云平台服务 > 零信任"
+AccountID = "2352ab2877954662b368b15e8a9f41f0"
+DomainType = "test"
+Protocol = "http"
+BackendHost = "10.11.157.225"
+BackendPort = 8041
+

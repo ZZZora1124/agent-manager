@@ -1,0 +1,20 @@
+# 服务配置加载的行为参数（ gdp/net/servicer.MustLoad 方法会读取的配置内容）
+[Loader]
+# 可选，是否严格模式，用于决定下游服务配置( Servicer 对象)，加载失败后的行为，默认为 false
+# 如使用 BNS 时，当 BNS-Agent 异常导致查询失败 或者返回的机器列表为空，会导致 Servicer Start 失败
+# 当为 true 时，启动失败后会 panic 以阻止程序启动
+# 当为 false 时，启动失败后会放入后台不断尝试直到成功
+# Strict = false
+
+# 可选，非严格模式下,当重启失败后，尝试 Start 的周期
+# 配置的时长 >= 1s 后有效
+# StartRetryInterval = "5s"
+
+# 可选，加载那些配置文件，只支持 * 通配符,默认值为 servicer/*.toml"
+# 地址应是相对于配置文件根目录（默认为 conf/ ）的地址
+FilesGlob = ["servicer/*.toml"]
+
+# 可选，检查配置文件修改后，自动 reload 的时间间隔，默认为空，即不 reload
+# 配置的时长 >= 1s 后有效
+# FileReloadInterval = "1s"
+

@@ -1,0 +1,22 @@
+Name = "redis"
+
+[Strategy]
+Name="RoundRobin"
+
+[Resource.Manual]
+[[Resource.Manual.default]]
+Host = "10.27.142.54"
+Port = 6379
+
+# redis 特有的配置，可选
+# Redis 专属配置内容，可选
+[Redis]
+DB = 3                        # 可选，默认0，Database to be selected
+PoolSizePerIP = 20              # 可选，默认10，每个实例pool连接容量
+MinIdleConnsPerIP = 20          # 可选，默认1，每个实例pool初始连接个数
+Username = ""            # 可选，redis 6.0及以上，启用ACL后使用
+Password = "REPLACE_ME"
+CmdArgsLogLen = 10              # 可选，默认0，打印命令参数长度(Byte)(日志中的args字段)。
+                                # 可选值：0:不打印,-1:全部打印,>0:指定长度
+MaxConnAge = 0                  # 可选，连接复用有效期，单位毫秒，默认0-长期有效
+

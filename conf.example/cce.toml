@@ -1,0 +1,5 @@
+# CCE API 配置
+AccessKey = "REPLACE_ME"
+SecretKey = "REPLACE_ME"
+Endpoint = "http://cce.bj.baidubce.com"
+

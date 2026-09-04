@@ -1,0 +1,61 @@
+# HTTP Server 的 access 日志
+# logit 文档：https://gdp.baidu-int.com/api/baidu/gdp/logit/
+# 此日志的 Notice 日志有框架的日志中间件打印，一个请求打印一条，可作为业务 SLA 的统计依据，业务逻辑不应该打印此 Notice 日志
+# wf 日志框架会答应，同时也允许业务逻辑打印
+
+# 日志文件名称
+FileName = "{gdp.LogDir}/service/service.log"
+
+# 日志切分规则,可选参数，默认为1hour
+# 可选值和切分的文件后缀如下：
+# 1hour -> .2020072714
+# no 不切分
+# 1day -> .20200727
+# 1min -> .202007271452
+# 5min -> .202007271450
+# 10min -> .202007271450
+# 30min -> .202007271430
+# 若上述默认规则不满足，也可以自定义，详见 baidu/gdp/extension ：writer
+RotateRule = "1hour"
+
+# 日志文件保留个数，可选参数
+# 是 notice、wf 文件的分别的个数
+# 默认48个，若为-1，日志文件将不清理
+MaxFileNum = 48
+
+# 日志异步队列大小，可选参数
+# 默认值 4096，若为-1，则队列大小为0
+BufferSize = 4096
+
+# 日志编码的对象池名称，可选参数
+# 默认为 default_text（普通文本编码）
+# 可选值：default_json (JSON 编码，会将 HTML 字符转义)
+# 可选值：default_json_html (JSON 编码，不会将 HTML 字符转义)
+# 可通过 RegisterEncoderPool 自定义
+EncoderPool = "default_json"
+
+# 日志内容前缀，可选参数
+# 默认为default (包含日志等级、当前时间[精确到秒]、调用位置)
+# 可选值：default-默认，时间精确到秒，default_nano-时间精确到纳秒、no-无前缀。
+# 可通过 RegisterPrefixFunc 自定义
+# 注意，这里配置 default_nano 的不是默认值
+Prefix = "default_nano"
+
+# 日志分发规则
+# 规则1：notice 类型的日志，输出到默认的日志文件（service/service.log）
+[[Dispatch]]
+FileSuffix = ""
+Levels = ["NOTICE"]
+
+# 规则2：WARNING 和 ERROR 、FATAL类型的日志，输出到wf日志文件（service/service.log.wf）
+# 同一个日志等级，可以出现在多个规则中，如也可以将WARNING配置到上述规则1
+[[Dispatch]]
+FileSuffix = ".wf"
+Levels = ["WARNING","ERROR","FATAL"]
+
+# 规则3： trace 类型的日志，输出到默认的日志文件（ral/ral.log.trace）
+[[Dispatch]]
+FileSuffix = ".trace"
+Levels = ["TRACE"]
+
+

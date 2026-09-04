@@ -1,0 +1,4 @@
+Name = "mcp_center"
+
+Endpoint = "http://10.11.157.225:8011"
+

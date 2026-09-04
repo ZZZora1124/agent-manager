@@ -1,0 +1,6 @@
+Name = "magellan_auth"
+
+Namespace = "ee-shell"
+Endpoint = "https://imagellan.baidu-int.com"
+Token = "REPLACE_ME"
+

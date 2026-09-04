@@ -1,0 +1,26 @@
+Name = "auth_center"
+
+Endpoint = "http://10.11.157.225:8061"
+ClientID = "FFmdbAeVCBCFSKJw"
+ClientSecret = "REPLACE_ME"
+
+comateClientID = "gtEaP72jfFYnsPr8"
+ComateClientSecret = "REPLACE_ME"
+
+dodoAppId = 71
+
+dodoAccessToken = "REPLACE_ME"
+
+browserAutoLoginEndpoint = "http://10.11.158.97:8301"
+
+# 沙箱 Ugate-Token 状态查询接口地址
+sandboxTokenStatusEndpoint = "REPLACE_ME"
+
+# UUAP 推送 AI 网关 Agent 信息配置
+# 联调环境
+uuapPushEndpoint = "https://itebeta.baidu.com/openclaw/pushAiGwTokenAgentInfo"
+uuapPushAppKey = "REPLACE_ME"
+uuapPushSecretKey = "REPLACE_ME"
+
+userSendCardTargetAppKey = "REPLACE_ME"
+
